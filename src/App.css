@@ -20,3 +20,13 @@
 .App-link {
   color: #09d3ac;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #CCC;
+  color: black;
+  text-align: center;
+}
