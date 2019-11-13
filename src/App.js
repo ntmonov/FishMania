@@ -6,82 +6,34 @@ import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Header from './components/shared/Header'
 import Footer from './components/shared/Footer'
-import { register } from '../src/utils/authRequests'
+import Logout from './components/auth/Logout'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      user: {
-        username: '',
-        password: '',
-        repeatPass: ''
-      },
-      errors: {
-        username: '',
-        password: '',
-        repeatPass: ''
-      },
-      loggedUser: ''
+      loggedInUser: ''
     }
-    this.onhandleInputChange = this.onhandleInputChange.bind(this)
-    this.validateUser = this.validateUser.bind(this)
-    this.registerUser = this.registerUser.bind(this)
-
+    this.getLoggedInUser = this.getLoggedInUser.bind(this)
+    this.clearUser = this.clearUser.bind(this)
   }
 
-  onhandleInputChange (e) {
-    const name = e.target.name
-    const value = e.target.value
-    const user = this.state.user
-    user[name] = value
-    this.setState({ user })
+  getLoggedInUser (username) {
+    this.setState({ loggedInUser: username })
   }
 
-  saveSession (user) {
-    window.sessionStorage.setItem('username', user.username)
-    window.sessionStorage.setItem('token', user._kmd.authtoken)
-    this.setState({ loggedUser: user.username })
-  }
-
-  registerUser () {
-    if (!this.validateUser(this.state.user)) {
-      return
-    }
-    const user = this.state.user
-    delete user.repeatPass
-    register(user).then(res => res.json()).then(user => { this.saveSession(user); window.location.href = '/' }).catch(e => console.error)
-  }
-
-  validateUser (user) {
-    let isValid = true
-    const errors = {}
-    if (!/^[A-Za-z]{3,}$/.test(user.username)) {
-      isValid = false
-      errors.username = 'Username must be at laest 3 letters'
-    }
-
-    if (!/^[A-Za-z0-9]{3,}$/.test(user.password)) {
-      isValid = false
-      errors.password = 'Password must be at laest 3 letters or digits'
-    }
-
-    if (user.password !== user.repeatPass) {
-      isValid = false
-      errors.repeatPass = 'Passwords do not match'
-    }
-
-    this.setState({ errors })
-    return isValid
+  clearUser () {
+    this.setState({ loggedInUser: '' })
   }
 
   render () {
     return (
       <>
-        <Header username={this.state.loggedUser} />
+        <Header username={this.state.loggedInUser} />
         <Route path='/' exact component={Home} />
-        <Route path='/register' render={(props) => <Register handleRegister={this.registerUser} handleChange={this.onhandleInputChange} user={this.state.user} errors={this.state.errors} />} />
+        <Route path='/register' render={(props) => <Register getUser={this.getLoggedInUser} />} />
         <Route path='/login' component={Login} />
+        <Route path='/logout' render={(props) => <Logout clearUser={this.clearUser} />} />
         <Footer />
       </>
     )

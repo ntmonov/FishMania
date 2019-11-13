@@ -16,4 +16,16 @@ function register (user) {
   return window.fetch(`${URL}user/${APP_KEY}/`, fetchData)
 }
 
-export { register }
+function logout () {
+  const kinveyHeaders = {
+    'Content-Type': 'application/json',
+    Authorization: 'Kinvey ' + window.localStorage.getItem('token')
+  }
+  const fetchData = {
+    method: 'POST',
+    headers: kinveyHeaders
+  }
+  return window.fetch(`${URL}user/${APP_KEY}/_logout`, fetchData)
+}
+
+export { register, logout }
