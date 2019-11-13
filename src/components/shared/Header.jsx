@@ -18,6 +18,7 @@ function Header () {
           </li>
         </ul>
       </div>
+      <span>Здравей {window.sessionStorage.getItem('username')}</span>
     </nav>
   )
 }
