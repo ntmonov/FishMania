@@ -32,7 +32,7 @@ class App extends React.Component {
         <Header username={this.state.loggedInUser} />
         <Route path='/' exact component={Home} />
         <Route path='/register' render={(props) => <Register getUser={this.getLoggedInUser} />} />
-        <Route path='/login' component={Login} />
+        <Route path='/login' render={(props) => <Login getUser={this.getLoggedInUser} />} />
         <Route path='/logout' render={(props) => <Logout clearUser={this.clearUser} />} />
         <Footer />
       </>
