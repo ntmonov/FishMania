@@ -12,15 +12,22 @@ class Header extends React.Component {
             <li className='nav-item active'>
               <Link className='nav-link' to='/'>Home <span className='sr-only'>(current)</span></Link>
             </li>
-            {!isAuth() && <li className='nav-item'>
-              <Link className='nav-link' to='/register'>Register</Link>
-            </li>}
-            {!isAuth() && <li className='nav-item'>
-              <Link className='nav-link' to='/login'>Login</Link>
-            </li>}
-            {isAuth() && <li className='nav-item'>
-              <Link className='nav-link' to='/logout'>Logout</Link>
-            </li>}
+            {!isAuth() && (
+              <li className='nav-item'>
+                <Link className='nav-link' to='/register'>Register</Link>
+              </li>)}
+            {!isAuth() && (
+              <li className='nav-item'>
+                <Link className='nav-link' to='/login'>Login</Link>
+              </li>)}
+            {isAuth() && (
+              <li className='nav-item'>
+                <Link className='nav-link' to='/logout'>Logout</Link>
+              </li>)}
+              {isAuth() && (
+              <li className='nav-item'>
+                <Link className='nav-link' to='/forum'>Forum</Link>
+              </li>)}
           </ul>
         </div>
         {isAuth() && <span>Hello {this.props.username}</span>}

@@ -7,6 +7,8 @@ import Login from './components/auth/Login'
 import Header from './components/shared/Header'
 import Footer from './components/shared/Footer'
 import Logout from './components/auth/Logout'
+import Topics from './components/forum/Topics'
+import Posts from './components/forum/Posts'
 
 class App extends React.Component {
   constructor (props) {
@@ -34,6 +36,8 @@ class App extends React.Component {
         <Route path='/register' render={(props) => <Register getUser={this.getLoggedInUser} />} />
         <Route path='/login' render={(props) => <Login getUser={this.getLoggedInUser} />} />
         <Route path='/logout' render={(props) => <Logout clearUser={this.clearUser} />} />
+        <Route path='/forum' component={Topics} />
+        <Route path='/topics/:id' component={Posts} />
         <Footer />
       </>
     )
