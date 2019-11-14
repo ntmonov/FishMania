@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { getTopics } from '../../utils/forumRequests'
+import CreateTopic from './CreateTopic'
 
 class Topics extends React.Component {
   constructor (props) {
@@ -40,15 +41,17 @@ class Topics extends React.Component {
 
   render () {
     return (
-      <ul className='list-group'>
-        {this.state.topics.map(topic => (
-          <li key={topic._id} className='list-group-item d-flex justify-content-between align-items-center'>
-            <Link to={`/topics/${topic._id}`}>{topic.title} | {this.calcTime(topic._kmd.ect)}</Link>
-            <span className='badge badge-primary badge-pill'>{14}</span>
-          </li>
-        ))}
-
-      </ul>
+      <>
+        <CreateTopic />
+        <ul className='list-group'>
+          {this.state.topics.map(topic => (
+            <li key={topic._id} className='list-group-item d-flex justify-content-between align-items-center'>
+              <Link to={`/topics/${topic._id}`}>{topic.title} | {this.calcTime(topic._kmd.ect)}</Link>
+              <span className='badge badge-primary badge-pill'>{14}</span>
+            </li>
+          ))}
+        </ul>
+      </>
     )
   }
 }

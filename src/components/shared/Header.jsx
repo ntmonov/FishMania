@@ -24,7 +24,7 @@ class Header extends React.Component {
               <li className='nav-item'>
                 <Link className='nav-link' to='/logout'>Logout</Link>
               </li>)}
-              {isAuth() && (
+            {isAuth() && (
               <li className='nav-item'>
                 <Link className='nav-link' to='/forum'>Forum</Link>
               </li>)}

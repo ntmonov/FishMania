@@ -25,4 +25,17 @@ function getPosts (topicId) {
   return window.fetch(`${URL}appdata/${APP_KEY}/posts/?query={"topicId":"${topicId}"}`, fetchData)
 }
 
-export { getTopics, getPosts }
+function postTopic (title) {
+  const kinveyHeaders = {
+    'Content-Type': 'application/json',
+    Authorization: 'Kinvey ' + window.localStorage.getItem('token')
+  }
+  const fetchData = {
+    method: 'POST',
+    headers: kinveyHeaders,
+    body: JSON.stringify({ title })
+  }
+  return window.fetch(`${URL}appdata/${APP_KEY}/topics`, fetchData)
+}
+
+export { getTopics, getPosts, postTopic }
