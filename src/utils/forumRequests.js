@@ -38,4 +38,17 @@ function postTopic (title) {
   return window.fetch(`${URL}appdata/${APP_KEY}/topics`, fetchData)
 }
 
-export { getTopics, getPosts, postTopic }
+function postComment (post) {
+  const kinveyHeaders = {
+    'Content-Type': 'application/json',
+    Authorization: 'Kinvey ' + window.localStorage.getItem('token')
+  }
+  const fetchData = {
+    method: 'POST',
+    headers: kinveyHeaders,
+    body: JSON.stringify(post)
+  }
+  return window.fetch(`${URL}appdata/${APP_KEY}/posts`, fetchData)
+}
+
+export { getTopics, getPosts, postTopic, postComment }

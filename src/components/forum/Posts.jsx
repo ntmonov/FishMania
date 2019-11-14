@@ -1,5 +1,6 @@
 import React from 'react'
 import { getPosts } from '../../utils/forumRequests'
+import CreatePost from './CreatePost'
 
 class Posts extends React.Component {
   constructor (props) {
@@ -23,6 +24,7 @@ class Posts extends React.Component {
   render () {
     return (
       <>
+        <CreatePost {...this.props} />
         {this.state.posts.map(post => (
           <div className='card' key={post._id}>
             <div className='card-body'>
