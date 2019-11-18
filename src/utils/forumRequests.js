@@ -51,4 +51,16 @@ function postComment (post) {
   return window.fetch(`${URL}appdata/${APP_KEY}/posts`, fetchData)
 }
 
-export { getTopics, getPosts, postTopic, postComment }
+function getPostsByTopicId (topicId) {
+  const kinveyHeaders = {
+    'Content-Type': 'application/json',
+    Authorization: 'Kinvey ' + window.localStorage.getItem('token')
+  }
+  const fetchData = {
+    method: 'GET',
+    headers: kinveyHeaders
+  }
+  return window.fetch(`${URL}appdata/${APP_KEY}/posts/_count?query={"topicId":"${topicId}"}`, fetchData)
+}
+
+export { getTopics, getPosts, postTopic, postComment, getPostsByTopicId }
