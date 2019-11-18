@@ -1,5 +1,6 @@
 import React from 'react'
-import { getPosts } from '../../utils/forumRequests'
+import { isAuthor } from '../../utils/auth'
+import { getPosts, deletePost } from '../../utils/forumRequests'
 import CreatePost from './CreatePost'
 
 class Posts extends React.Component {
@@ -9,6 +10,7 @@ class Posts extends React.Component {
       posts: []
     }
     this.getData = this.getData.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount () {
@@ -21,6 +23,11 @@ class Posts extends React.Component {
     this.setState({ posts })
   }
 
+  async handleDelete (postId) {
+    await deletePost(postId)
+    this.getData()
+  }
+
   render () {
     return (
       <>
@@ -31,6 +38,7 @@ class Posts extends React.Component {
               <h5 className='card-title'>{post.title}</h5>
               <p className='card-text'>{post.body}</p>
               <p>Posted By {post.user}</p>
+              {isAuthor(post._acl.creator) && <button className='btn btn-danger' onClick={() => this.handleDelete(post._id)}>Delete</button>}
             </div>
           </div>
         ))}

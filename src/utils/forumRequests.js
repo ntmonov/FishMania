@@ -63,4 +63,16 @@ function getPostsByTopicId (topicId) {
   return window.fetch(`${URL}appdata/${APP_KEY}/posts/_count?query={"topicId":"${topicId}"}`, fetchData)
 }
 
-export { getTopics, getPosts, postTopic, postComment, getPostsByTopicId }
+function deletePost (postId) {
+  const kinveyHeaders = {
+    'Content-Type': 'application/json',
+    Authorization: 'Kinvey ' + window.localStorage.getItem('token')
+  }
+  const fetchData = {
+    method: 'DELETE',
+    headers: kinveyHeaders
+  }
+  return window.fetch(`${URL}appdata/${APP_KEY}/posts/${postId}`, fetchData)
+}
+
+export { getTopics, getPosts, postTopic, postComment, getPostsByTopicId, deletePost }

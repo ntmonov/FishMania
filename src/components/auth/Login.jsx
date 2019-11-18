@@ -48,6 +48,7 @@ class Login extends React.Component {
   saveSession (user) {
     window.localStorage.setItem('username', user.username)
     window.localStorage.setItem('token', user._kmd.authtoken)
+    window.localStorage.setItem('userId', user._id)
   }
 
   validateUser (user) {

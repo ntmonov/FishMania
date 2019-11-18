@@ -2,4 +2,8 @@ function isAuth () {
   return window.localStorage.getItem('token') !== null
 }
 
-export { isAuth }
+function isAuthor (userId) {
+  return userId === window.localStorage.getItem('userId')
+}
+
+export { isAuth, isAuthor }
